@@ -7,10 +7,10 @@ public class Starter {
         AplicarDescuento calculator = new AplicarDescuento();
         double amount = 200.0;
 
-        double regularDiscount = calculator.descontar(new Regular());
-        double premiumDiscount = calculator.descontar(new Premium());
-        double vipDiscount = calculator.descontar(new Vip());
-        double studentDiscount = calculator.descontar(new Student());
+        double regularDiscount = calculator.PricingService(new RegularCustomerDiscount());
+        double premiumDiscount = calculator.PricingService(new PremiumCustomerDiscount());
+        double vipDiscount = calculator.PricingService(new VipCustomerDiscount());
+        double studentDiscount = calculator.PricingService(new StudentCustomerDiscount());
 
         System.out.println("Regular pays: " + (amount - amount * regularDiscount));
         System.out.println("Premium pays: " + (amount - amount * premiumDiscount));
@@ -26,7 +26,7 @@ interface DiscountPolicy {
     public double aDescontar();
 }
 
-class Regular implements DiscountPolicy {
+class RegularCustomerDiscount implements DiscountPolicy {
 
     @Override
     public double aDescontar() {
@@ -34,7 +34,7 @@ class Regular implements DiscountPolicy {
     }
 }
 
-class Premium implements DiscountPolicy {
+class PremiumCustomerDiscount implements DiscountPolicy {
 
     @Override
     public double aDescontar() {
@@ -42,7 +42,7 @@ class Premium implements DiscountPolicy {
     }
 }
 
-class Vip implements DiscountPolicy {
+class VipCustomerDiscount implements DiscountPolicy {
 
     @Override
     public double aDescontar() {
@@ -50,16 +50,17 @@ class Vip implements DiscountPolicy {
     }
 }
 
-class Student implements DiscountPolicy {
+class StudentCustomerDiscount implements DiscountPolicy {
 
     @Override
     public double aDescontar() {
         return 0.15;
     }
+
 }
 
 class AplicarDescuento{
-    public double descontar(DiscountPolicy descuento){
+    public double PricingService(DiscountPolicy descuento){
         return descuento.aDescontar();
     }
 }
